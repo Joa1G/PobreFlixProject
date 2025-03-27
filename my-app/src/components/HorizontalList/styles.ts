@@ -41,5 +41,9 @@ export const styles = StyleSheet.create({
         textAlign: "center",
         marginVertical: 5,
         marginHorizontal: 5,
-    }
+    },
+    list: {
+        paddingVertical: 10,
+        paddingHorizontal: 15
+    },
 });

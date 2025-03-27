@@ -17,3 +17,13 @@ export const getTopRatedMovies = async () => {
     const response = await api.get("/movie/top_rated");
     return response.data.results;
 }
+
+export const getNewMovies = async () => {
+    const response = await api.get("/movie/now_playing");
+    return response.data.results;
+}
+
+export const getDetailsMedia = async (id: number) => {
+    const response = await api.get(`/movie/${id}`)
+    return response.data;
+}

@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const homeStyle = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        backgroundColor: '#27548A',
-    },
     headingContainer: {
         backgroundColor: "#143D60",
         height: 80,

@@ -1,18 +1,24 @@
-import { View, Text, TouchableOpacity, Image, FlatList, StyleSheet } from "react-native";
-import { Media, Sections } from "../../../types/types";
+import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
+import { Media, Sections } from "../../types/types";
 import { styles } from "./styles";
+import { useRouter } from "expo-router";
 
 type HorizontalListProps = {
-    title: string,
-    data: Media[]
+    sections: Sections
 }
 
 const BASE_IMAGE = 'https://image.tmdb.org/t/p/w200'
 
-export default function HorizontalList( {title, data}:HorizontalListProps ){
+export default function HorizontalList( {sections}:HorizontalListProps ){
+
+    const router = useRouter();
+
+    const handleNavigationDetails = (id: number) => {
+        router.push(`/Details/${id}`)
+    }
     
     const renderItem = ({item}: {item:Media}) => (
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => handleNavigationDetails(item.id)} >
             <Image style={styles.itemImage }resizeMode="cover" source={{ uri: `${BASE_IMAGE}${item.poster_path}` }}/>
             <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}> {item.name || item.title} </Text>
         </TouchableOpacity>
@@ -20,13 +26,18 @@ export default function HorizontalList( {title, data}:HorizontalListProps ){
 
     return (
         <View style={styles.container}>
-            <Text style={styles.sectionTitle}> { title } </Text>
+            <Text style={styles.sectionTitle}> { sections.title } </Text>
+
             <FlatList 
-            data={data}
+            data={sections.data}
             renderItem={ renderItem }
             keyExtractor={(item) => item.id.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={ styles.list }
+            snapToAlignment="start"
+            decelerationRate={"fast"}
+            snapToInterval={155}
             />
         </View>
 

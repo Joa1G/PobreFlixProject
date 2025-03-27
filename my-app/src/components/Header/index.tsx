@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View, Modal} from 'react-native';
-import { homeStyle } from '../app/styles/homeStyle';
-import MenuButton  from '../components/menuButton';
+import { homeStyle } from './styles';
+import MenuButton  from '../MenuButton/index';
 import { useState } from 'react';
 
 export default function Header(){
