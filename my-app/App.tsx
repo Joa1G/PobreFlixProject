@@ -7,6 +7,7 @@ export default function App(){
         <SafeAreaProvider>
             <Home/>
         </SafeAreaProvider>
-        
     );
 }
+
+//teste do git hub
