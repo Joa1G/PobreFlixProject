@@ -26,6 +26,12 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+
+    "extra": {
+      "router": {
+        "root": "./src/app"
+      }
+    }
   }
 }

@@ -6,6 +6,7 @@ import { getDetailsMedia } from "../../services/themoviedb.service";
 import { styles } from "./styles";
 import  Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from "expo-status-bar";
 
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -52,6 +53,7 @@ export default function DetailsMedia() {
 
     return (
         <ScrollView style={ styles.containerDetails } >
+            <StatusBar style="light" backgroundColor="#27548A"/>
             
             {/*  Container Image */}
             <View style={ styles.imageContainer } >

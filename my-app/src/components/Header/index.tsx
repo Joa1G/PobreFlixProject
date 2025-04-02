@@ -52,25 +52,6 @@ export default function Header(){
                 </View>
             </TouchableOpacity>
             </Modal>
-
-            {/* {
-            menuVisible && (
-                <View style={ homeStyle.menuDropdown}>
-                <TouchableOpacity activeOpacity={0.7} style={homeStyle.menuDropdownItem}>
-                    <Text style={homeStyle.menuDropdownText}>Filme</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity activeOpacity={0.7} style={homeStyle.menuDropdownItem}>
-                    <Text style={homeStyle.menuDropdownText}>Série</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity activeOpacity={0.7} style={homeStyle.menuDropdownItem}>
-                    <Text style={homeStyle.menuDropdownText}>Anime</Text>
-                </TouchableOpacity>
-                </View>
-                
-            )
-            } */}
         </View>
     );
 }
