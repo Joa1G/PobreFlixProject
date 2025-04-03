@@ -3,6 +3,7 @@ import { getPopularMovie, getTopRatedMovies, getNewMovies, getUpComingMovies, ge
 import HorizontalList from '../HorizontalList';
 import { Media, Sections } from "../../types/types";
 import { FlatList } from "react-native";
+import isMovie from "../../modules/isMovie";
 
 export default function ListMovie(){
 
