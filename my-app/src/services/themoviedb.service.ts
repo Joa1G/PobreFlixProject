@@ -3,10 +3,20 @@ import axios from "axios";
 const api = axios.create({
     baseURL: "https://api.themoviedb.org/3",
     params: {
-        api_key: '8c04d873f9bf02d9fab3d03cd93e5e65',
+        api_key: '8c04d873f9bf02d9fab3d03cd93e5e65', 
         language: "pt-BR",
     }
 })
+
+export const getDetailsMediaMovies = async (id: number) => {
+    const response = await api.get(`/movie/${id}`)
+    return response.data;
+}
+
+export const getDetailsMediaShows = async (id: number) => {
+    const response = await api.get(`tv/${id}`)
+    return response.data;
+}
 
 export const getPopularMovie = async () => {
     const response = await api.get("/discover/movie");
@@ -23,7 +33,27 @@ export const getNewMovies = async () => {
     return response.data.results;
 }
 
-export const getDetailsMedia = async (id: number) => {
-    const response = await api.get(`/movie/${id}`)
-    return response.data;
+export const getUpComingMovies = async () => {
+    const response = await api.get("movie/upcoming");
+    return response.data.results;
+}
+
+export const getExibitionShows = async () => {
+    const response = await api.get("tv/airing_today");
+    return response.data.results;
+}
+
+export const getOnAirShows = async () => {
+    const response = await api.get("tv/on_the_air");
+    return response.data.results;
+}
+
+export const getPopularShows = async () => {
+    const response = await api.get("tv/popular");
+    return response.data.results;
+}
+
+export const getTopRatedShows = async () => {
+    const response = await api.get("tv/top_rated");
+    return response.data.results;
 }

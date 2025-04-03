@@ -2,7 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Media } from "../../types/types";
 import { ScrollView, View, Image, Text, TouchableOpacity } from "react-native";
-import { getDetailsMedia } from "../../services/themoviedb.service";
+import { getDetailsMediaMovies, getDetailsMediaShows } from "../../services/themoviedb.service";
 import { styles } from "./styles";
 import  Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -16,14 +16,18 @@ export default function DetailsMedia() {
     const router = useRouter();
 
     const [ media, setMedia ] = useState<Media | null>(null);
+    const [ mediaShows, setMediaShows] = useState<Media | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             
             try {
-    
-                const dataMedia = await getDetailsMedia( Number(id) );
+                
+                const dataMedia = await getDetailsMediaMovies( Number(id) );
+                const dataMediaShows = await getDetailsMediaShows ( Number(id) );
+
                 setMedia(dataMedia);
+                setMediaShows(dataMediaShows);
                 
             } catch (error) {
                 console.error('Ocorreu um erro na requisição: ', error);
@@ -50,7 +54,7 @@ export default function DetailsMedia() {
     const handleNavigationBack = () => {
         router.back();
     }
-
+    
     return (
         <ScrollView style={ styles.containerDetails } >
             <StatusBar style="light" backgroundColor="#27548A"/>
@@ -58,7 +62,7 @@ export default function DetailsMedia() {
             {/*  Container Image */}
             <View style={ styles.imageContainer } >
                 <Image style={ styles.posterImage } resizeMode="cover" source={ { uri: `${BASE_IMAGE_URL}${media?.poster_path}` } } />
-
+                
                 <LinearGradient style={ styles.gradient } colors={["rgba(10, 15, 26, 0)", "rgba(10, 15, 26, 0.9)"]} />
 
                 <TouchableOpacity style={ styles.buttonReturn } onPress={ handleNavigationBack } >
