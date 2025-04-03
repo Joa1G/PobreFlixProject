@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { Media, Sections } from "../../types/types";
 import { styles } from "./styles";
 import { useRouter } from "expo-router";
+import isMovie from "../../modules/isMovie";
 
 type HorizontalListProps = {
     sections: Sections
@@ -14,7 +15,11 @@ export default function HorizontalList( {sections}:HorizontalListProps ){
     const router = useRouter();
 
     const handleNavigationDetails = (id: number) => {
-        router.push(`/Details/${id}`)
+        if (isMovie(sections.title)){
+            router.push(`/DetailsMovies/${id}`)
+        }else{
+            router.push(`DetailsShows/${id}`)
+        }
     }
     
     const renderItem = ({item}: {item:Media}) => (

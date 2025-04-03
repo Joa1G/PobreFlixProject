@@ -2,7 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Media } from "../../types/types";
 import { ScrollView, View, Image, Text, TouchableOpacity } from "react-native";
-import { getDetailsMediaMovies, getDetailsMediaShows } from "../../services/themoviedb.service";
+import { getDetailsMediaMovies} from "../../services/themoviedb.service";
 import { styles } from "./styles";
 import  Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -24,10 +24,8 @@ export default function DetailsMedia() {
             try {
                 
                 const dataMedia = await getDetailsMediaMovies( Number(id) );
-                const dataMediaShows = await getDetailsMediaShows ( Number(id) );
 
                 setMedia(dataMedia);
-                setMediaShows(dataMediaShows);
                 
             } catch (error) {
                 console.error('Ocorreu um erro na requisição: ', error);
