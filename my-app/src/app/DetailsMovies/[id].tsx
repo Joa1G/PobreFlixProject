@@ -96,7 +96,6 @@ export default function DetailsMovie() {
                 {/* Outras Informações */}
                 <View style={ styles.otherInfoContainer } >
                     <Text style={ styles.titleInfo } >Detalhes</Text>
-                    <Text style={ styles.otherInfoText } >Data de lançamento: {media?.release_date}</Text>
                     <Text style={ styles.otherInfoText } >Orçamento: { media?.budget ? formatCurrency(media.budget) : 'N/A' } </Text>
                     <Text style={ styles.otherInfoText } >Receita: { media?.revenue ? formatCurrency(media.revenue) : 'N/A' } </Text>
                     <Text style={ styles.otherInfoText } >Status: { media?.status ? media.status : 'N/A' } </Text>

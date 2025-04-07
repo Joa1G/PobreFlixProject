@@ -4,7 +4,13 @@ import MenuButton  from '../MenuButton/index';
 import { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function Header(){
+type FilterType = 'all' | 'movies' | 'series';
+
+type HeaderProps = {
+    onChangeFilter: (filter: FilterType) => void;
+};
+
+export default function Header({ onChangeFilter }: HeaderProps){
 
         const insets = useSafeAreaInsets();
 
@@ -46,12 +52,33 @@ export default function Header(){
             >
                 {/* Aqui é o nosso menu dropdown, onde as opções aparecem bonitinhas feitas em aula */}
                 <View style={[homeStyle.menuDropdown, {top: headerHeight + insets.top}]}>   
-                <TouchableOpacity style={homeStyle.menuItem}>
+                <TouchableOpacity style={homeStyle.menuItem} onPress={
+                    () => {
+                        onChangeFilter('movies');
+                        handleMenuVisible;
+                    }
+                }>
                     <Text style={homeStyle.menuItemText}>Filmes</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={homeStyle.menuItem}>
+
+                <TouchableOpacity style={homeStyle.menuItem} onPress={
+                    () => {
+                        onChangeFilter('series');
+                        handleMenuVisible;
+                    }
+                }>
                     <Text style={homeStyle.menuItemText}>Séries</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={homeStyle.menuItem} onPress={
+                    () => {
+                        onChangeFilter('all');
+                        handleMenuVisible;
+                    }
+                }>
+                    <Text style={homeStyle.menuItemText}>Todos</Text>
+                </TouchableOpacity>
+
                 </View>
             </TouchableOpacity>
             </Modal>

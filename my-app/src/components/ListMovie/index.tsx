@@ -4,7 +4,11 @@ import HorizontalList from '../HorizontalList';
 import { Media, Sections } from "../../types/types";
 import { FlatList } from "react-native";
 
-export default function ListMovie(){
+type ListMovieProps = {
+    filter: 'all' | 'movies' | 'series';
+  };
+
+export default function ListMovie({ filter }: ListMovieProps){
 
     const [ moviePopulars, setMoviePopulars] = useState<Media[]>([]);
     const [movieTopRated, setMovieTopRated] = useState<Media[]>([]);
@@ -54,6 +58,12 @@ export default function ListMovie(){
         { title: "Séries populares", data: popularShow},
         { title: "Séries mais bem avaliadas", data: topRatedShow}
       ]
+
+      const filteredSections = sections.filter(section => {
+        if (filter === 'movies') return section.title.startsWith('Filmes');
+        if (filter === 'series') return section.title.startsWith('Séries');
+        return true; // all
+      });
     
       const renderSection = ({item}: {item:Sections}) => (
           <HorizontalList sections={ item }/>
@@ -61,7 +71,7 @@ export default function ListMovie(){
 
     return(
         <FlatList
-        data={ sections }
+        data={ filteredSections }
         renderItem={renderSection}
         keyExtractor={ (item) => item.title }
         />
