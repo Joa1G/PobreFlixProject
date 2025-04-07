@@ -10,13 +10,12 @@ import { StatusBar } from "expo-status-bar";
 
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-export default function DetailsMedia() {
+export default function DetailsMovie() {
 
     const { id } = useLocalSearchParams();
     const router = useRouter();
 
     const [ media, setMedia ] = useState<Media | null>(null);
-    const [ mediaShows, setMediaShows] = useState<Media | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -83,7 +82,7 @@ export default function DetailsMedia() {
 
                         <View style={ styles.rating } >
                             <Ionicons name="star" color="#FFD700" size={16} />
-                            <Text style={ styles.ratingText } >8/10</Text>
+                            <Text style={ styles.ratingText } >{(media?.vote_average)?.toFixed(2)}</Text>
                         </View>
                     </View>
                 </View>
@@ -97,6 +96,7 @@ export default function DetailsMedia() {
                 {/* Outras Informações */}
                 <View style={ styles.otherInfoContainer } >
                     <Text style={ styles.titleInfo } >Detalhes</Text>
+                    <Text style={ styles.otherInfoText } >Data de lançamento: {media?.release_date}</Text>
                     <Text style={ styles.otherInfoText } >Orçamento: { media?.budget ? formatCurrency(media.budget) : 'N/A' } </Text>
                     <Text style={ styles.otherInfoText } >Receita: { media?.revenue ? formatCurrency(media.revenue) : 'N/A' } </Text>
                     <Text style={ styles.otherInfoText } >Status: { media?.status ? media.status : 'N/A' } </Text>

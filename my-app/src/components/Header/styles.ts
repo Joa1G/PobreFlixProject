@@ -18,8 +18,8 @@ export const homeStyle = StyleSheet.create({
         color: "#fff",
     },
     menuDropdown: {
+        top: 80,
         position: 'absolute',
-        top: 120,
         right: 0,
         left: 0,
         paddingVertical: 10,

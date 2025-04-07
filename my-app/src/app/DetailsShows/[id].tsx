@@ -2,7 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Media } from "../../types/types";
 import { ScrollView, View, Image, Text, TouchableOpacity } from "react-native";
-import { getDetailsMediaShows } from "../../services/themoviedb.service";
+import { getDetailsMediaShows, getShowsNumberOfEpisodes, getShowsNumberOfSeasons } from "../../services/themoviedb.service";
 import { styles } from "../DetailsMovies/styles";
 import  Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -10,12 +10,15 @@ import { StatusBar } from "expo-status-bar";
 
 const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-export default function DetailsMedia() {
+export default function DetailsShow() {
 
     const { id } = useLocalSearchParams();
     const router = useRouter();
 
     const [ mediaShows, setMediaShows] = useState<Media | null>(null);
+    const [ numberOfEpisodes, setNumberOfEpisodes ] = useState<number>();
+    const [ numberOfSeasons, setNumberOfSeasons ] = useState<number>();
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,8 +26,12 @@ export default function DetailsMedia() {
             try {
                 
                 const dataMediaShows = await getDetailsMediaShows( Number(id) );
+                const dataNumberOfEpisodes = await getShowsNumberOfEpisodes( Number(id) );
+                const dataNumberOfSeasons = await getShowsNumberOfSeasons( Number(id) );
 
                 setMediaShows(dataMediaShows);
+                setNumberOfEpisodes(dataNumberOfEpisodes);
+                setNumberOfSeasons(dataNumberOfSeasons);
                 
             } catch (error) {
                 console.error('Ocorreu um erro na requisição: ', error);
@@ -77,12 +84,12 @@ export default function DetailsMedia() {
 
                     <View style={ styles.infoMedia } >
                         <Text style={ styles.infoDate } >
-                            { mediaShows?.release_date?.substring(0,4) } - {" "} { mediaShows?.runtime ? formatRuntime(mediaShows.runtime) : 'N/A' }
+                            { numberOfEpisodes } Episódios Totais - { numberOfSeasons } Temporadas
                         </Text>
 
                         <View style={ styles.rating } >
                             <Ionicons name="star" color="#FFD700" size={16} />
-                            <Text style={ styles.ratingText } >8/10</Text>
+                            <Text style={ styles.ratingText } >{(mediaShows?.vote_average)?.toFixed(2)}</Text>
                         </View>
                     </View>
                 </View>
@@ -96,8 +103,8 @@ export default function DetailsMedia() {
                 {/* Outras Informações */}
                 <View style={ styles.otherInfoContainer } >
                     <Text style={ styles.titleInfo } >Detalhes</Text>
-                    <Text style={ styles.otherInfoText } >Orçamento: { mediaShows?.budget ? formatCurrency(mediaShows.budget) : 'N/A' } </Text>
-                    <Text style={ styles.otherInfoText } >Receita: { mediaShows?.revenue ? formatCurrency(mediaShows.revenue) : 'N/A' } </Text>
+                    <Text style={ styles.otherInfoText } >Tipo: { mediaShows?.type } </Text>
+                    <Text style={ styles.otherInfoText } >Data de lançamento: { (mediaShows?.first_air_date) } </Text>
                     <Text style={ styles.otherInfoText } >Status: { mediaShows?.status ? mediaShows.status : 'N/A' } </Text>
                     <Text style={ styles.otherInfoText } >Idioma Original: { mediaShows?.original_language ? mediaShows.original_language : 'N/A' } </Text>
                 </View>

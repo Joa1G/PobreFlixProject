@@ -17,6 +17,15 @@ export const getDetailsMediaShows = async (id: number) => {
     const response = await api.get(`tv/${id}`)
     return response.data;
 }
+export const getShowsNumberOfEpisodes = async ( id: number) => {
+    const response = await api.get(`tv/${id}`)
+    return response.data.number_of_episodes;
+}
+
+export const getShowsNumberOfSeasons = async ( id: number) => {
+    const response = await api.get(`tv/${id}`)
+    return response.data.number_of_seasons;
+}
 
 export const getPopularMovie = async () => {
     const response = await api.get("/discover/movie");

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     subTitlePost: {
         color: '#BF3131',
-        fontFamily: "italic",
+        fontStyle: "italic",
         textShadowColor: "#fff",
         textShadowOffset: {width: 1, height: 1},
         textShadowRadius: 0.3,

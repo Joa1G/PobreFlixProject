@@ -12,11 +12,15 @@ export type Media = {
     runtime?: number;
     vote_average?: number
     original_language?: string;
-    revenue?: number
+    revenue?: number;
     status?: string;
+    vote_average?: string;
+    type?: string;
+    first_air_date?: string;
+    release_date?: string;
 }
 
 export type Sections = {
-    title: string,
-    data: Media[]
+    title: string;
+    data: Media[];
 }

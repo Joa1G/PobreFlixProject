@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { Media, Sections } from "../../types/types";
 import { styles } from "./styles";
 import { useRouter } from "expo-router";
-import isMovie from "../../modules/isMovie";
+import isMovie from "../../validators/isMovie";
 
 type HorizontalListProps = {
     sections: Sections

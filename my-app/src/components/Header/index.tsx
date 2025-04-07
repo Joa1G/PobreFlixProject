@@ -2,16 +2,26 @@ import { Text, TouchableOpacity, View, Modal} from 'react-native';
 import { homeStyle } from './styles';
 import MenuButton  from '../MenuButton/index';
 import { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Header(){
+
+        const insets = useSafeAreaInsets();
+
         const [ menuVisible, setMenuVisible] = useState<boolean>(false);
 
         const handleMenuVisible = () => {
         setMenuVisible(!menuVisible)
         }
 
+        const [headerHeight, setHeaderHeight] = useState(0)
+
     return(
-        <View style={homeStyle.headingContainer}>
+        <View style={homeStyle.headingContainer} onLayout={(event) => {
+            const { height } = event.nativeEvent.layout;
+            setHeaderHeight(height);
+        }}
+        >
 
             {/*Texto de título*/}
             <Text style={homeStyle.headingText}> 
@@ -35,20 +45,13 @@ export default function Header(){
                 onPress={handleMenuVisible} // Fecha o modal ao clicar fora
             >
                 {/* Aqui é o nosso menu dropdown, onde as opções aparecem bonitinhas feitas em aula */}
-                <View style={homeStyle.menuDropdown}>
-                <TouchableOpacity style={homeStyle.menuItem}>
-                    <Text style={homeStyle.menuItemText}>Pesquisar</Text>
-                </TouchableOpacity>    
+                <View style={[homeStyle.menuDropdown, {top: headerHeight + insets.top}]}>   
                 <TouchableOpacity style={homeStyle.menuItem}>
                     <Text style={homeStyle.menuItemText}>Filmes</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={homeStyle.menuItem}>
                     <Text style={homeStyle.menuItemText}>Séries</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={homeStyle.menuItem}>
-                    <Text style={homeStyle.menuItemText}>Animes</Text>
-                </TouchableOpacity>
-                
                 </View>
             </TouchableOpacity>
             </Modal>
